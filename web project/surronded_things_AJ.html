@@ -1,0 +1,84 @@
+<html lang="en">
+	<head>
+	<title>鞋特</title>
+	<meta charset="utf-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
+    <style>
+	.round{
+            border: 3px solid NavajoWhite  ;
+            padding: 5px 20px; 
+            background: White;
+            width: 45%;
+			height:30%
+            text-align: center;
+            border-radius: 50px; /* increasing border-radius */
+			float:left;
+			margin-left:10px;
+			margin-top:20px;
+			text-align:center;
+		  }
+	
+	</style>
+	<script>
+	var jsonTest="https://api.myjson.com/bins/1dbwhi";
+	$.getJSON(jsonTest, function (data) {
+            for (var index in data.surronded_thing) {
+				var content =
+                    "<div class='round'><h2>" +data.surronded_thing[index].name+" $"+data.surronded_thing[index].price+"("+data.surronded_thing[index].type+
+                    ")</h2><a href='"+data.surronded_thing[index].priceUrl+"'target='_blank'><img src='" + data.surronded_thing[index].imageUrl + "'width='20%' height='20%' />" + "</a>" +
+                    "</div>";
+                $("body").append(content);
+            }
+        });
+	$(document).ready(function(){
+		$("#re").mouseenter(function(){
+		      $(this).attr("src","images/reset_hover.png");
+		});
+		$("#re").mouseout(function(){
+		      $(this).attr("src","images/reset.png");
+		});
+		$("#back").mouseenter(function(){
+		      $(this).attr("src","images/back_hover.png");
+		});
+		$("#back").mouseout(function(){
+		      $(this).attr("src","images/back.png");
+		});
+	});
+
+	function classify(obj)
+	{
+		 var value = obj.alt;
+		 console.log(value);
+		$("div.round").filter(function () {
+         if ($(this).text().toLowerCase().indexOf(value) > -1){
+						$(this).show();	
+				    }
+                    else{
+                        $(this).hide();
+					}
+                });
+	}
+	function reset()
+	{
+	     $("div.round").filter(function () {
+		    $(this).show();
+		 
+		 });
+	}
+	</script>
+	</head>
+	<body style="background-color:black;">
+	　　<a href="main.html"><img id="back"src="images/back.png" style="width:50px; height:50px;"></a>
+		<h1 style="text-align:center;color:white;">點選球員身上產品以獲取相關資訊<img id="re" src="images/reset.png"style="width:50px; height:50px;" onclick="reset()"></h1>
+		<div style="text-align:center;"><img src="images/westbrook.jpg" usemap="#workmap"></div>
+		<div id = "product"></div>
+		<map name="workmap">
+			<area shape="rect" coords="98,237,197,341" alt="籃球" onclick="classify(this)">
+			<area shape="rect" coords="341,264,364,299" alt="手環" onclick = "classify(this)">
+			<area shape="rect" coords="405,347,610,632" alt="束褲" onclick = "classify(this)">
+			<area shape="rect" coords="255,221,322,343" alt="球衣" onclick = "classify(this)">
+			<area shape="rect" coords="254,182,397,204" alt="束衣" onclick = "classify(this)">
+		</map>
+		
+	</body>
+</html>
