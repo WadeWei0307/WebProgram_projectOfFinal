@@ -1,0 +1,270 @@
+<html>
+<head>
+		<title>鞋特</title>
+		<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/main_style.css" type="text/css" media="screen"/>
+		<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<!-- import fancybox js  -->
+		<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+		<script type="text/javascript"
+		src="http://lmcdwriting.org/userfiles/lmcsilver20121007/fancyapps-fancyBox-0ffc358/source/jquery.fancybox.js"></script>
+		<script type="text/javascript" src="http://lmcdwriting.org/userfiles/lmcsilver20121007/fancyapps-fancyBox-0ffc358/source/helpers/jquery.fancybox-media.js"></script>
+		<link rel="stylesheet" type="text/css"
+		href="http://lmcdwriting.org/userfiles/lmcsilver20121007/fancyapps-fancyBox-0ffc358/source/jquery.fancybox.css"
+		media="screen"></link>
+		<!-- end of fancybox js  -->
+		<script type="text/javascript" src="jquery.easing.1.3.js"></script>
+        <script type="text/javascript">
+  $(function(){
+    $("#opening").click(function(){
+	     $(this).fadeOut();
+	});
+	
+	
+	// 先取得必要的元素並用 jQuery 包裝
+	// 再來取得 $block 的高度及設定動畫時間
+	var $block = $('#abgneBlock'),
+		$slides = $('ul.list', $block),
+		_width = $block.width(),
+		$li = $('li', $slides),
+		_animateSpeed = 600, 
+		// 加入計時器, 輪播時間及控制開關
+		timer, _showSpeed = 3000, _stop = false;
+ 
+	// 產生 li 選項
+	var _str = '';
+	for(var i=0, j=$li.length;i<j;i++){
+		// 每一個 li 都有自己的 className = playerControl_號碼
+		_str += '<li class="playerControl_' + (i+1) + '"></li>';
+	}
+ 
+	// 產生 ul 並把 li 選項加到其中
+	var $playerControl = $('<ul class="playerControl"></ul>').html(_str).appendTo($slides.parent()).css('left', function(){
+		// 把 .playerControl 移到置中的位置
+		return (_width - $(this).width()) / 2;
+	});
+ 
+	// 幫 li 加上 click 事件
+	var $playerControlLi = $playerControl.find('li').click(function(){
+		var $this = $(this);
+		$this.addClass('current').siblings('.current').removeClass('current');
+ 
+		clearTimeout(timer);
+		// 移動位置到相對應的號碼
+		$slides.stop().animate({
+			left: _width * $this.index() * -1
+		}, _animateSpeed, function(){
+			// 當廣告移動到正確位置後, 依判斷來啟動計時器
+			if(!_stop) timer = setTimeout(move, _showSpeed);
+		});
+ 
+		return false;
+	}).eq(0).click().end();
+ 
+	// 如果滑鼠移入 $block 時
+	$block.hover(function(){
+		// 關閉開關及計時器
+		_stop = true;
+		clearTimeout(timer);
+	}, function(){
+		// 如果滑鼠移出 $block 時
+		// 開啟開關及計時器
+		_stop = false;
+		timer = setTimeout(move, _showSpeed);
+	});
+ 
+	// 計時器使用
+	function move(){
+		var _index = $('.current').index();
+		$playerControlLi.eq((_index + 1) % $playerControlLi.length).click();
+	}
+    $('#sdt_menu > li').bind('mouseenter',function(){
+		            $('#topclass').css({"height":"255px","margin-top":"80px"});
+					var $elem = $(this);
+					$elem.find('img')
+						 .stop(true)
+						 .animate({
+							'width':'200px',
+							'height':'170px',
+							'left':'0px'
+						 },400,'easeOutBack')
+						 .andSelf()
+						 .find('.sdt_wrap')
+					     .stop(true)
+						 .animate({'top':'140px'},500,'easeOutBack')
+						 .andSelf()
+						 .find('.sdt_active')
+					     .stop(true)
+						 .animate({'height':'170px'},300,function(){
+						var $sub_menu = $elem.find('.sdt_box');
+						if($sub_menu.length){
+							var left = '200px';
+							if($elem.parent().children().length == $elem.index()+1)
+								left = '-200px';
+							$sub_menu.show().animate({'left':left},200);
+						}	
+					});
+				}).bind('mouseleave',function(){
+					 $('#topclass').css({"height":"85px","margin-top":"0px"});
+					var $elem = $(this);
+					var $sub_menu = $elem.find('.sdt_box');
+					if($sub_menu.length)
+						$sub_menu.hide().css('left','0px');
+					
+					$elem.find('.sdt_active')
+						 .stop(true)
+						 .animate({'height':'0px'},300)
+						 .andSelf().find('img')
+						 .stop(true)
+						 .animate({
+							'width':'0px',
+							'height':'0px',
+							'left':'85px'},400)
+						 .andSelf()
+						 .find('.sdt_wrap')
+						 .stop(true)
+						 .animate({'top':'25px'},500);
+				});
+});
+function fancyboxvideo(w0411, h0411, s0411) {
+$.fancybox({
+width: w0411,
+height: h0411,
+href: s0411,
+
+type: 'iframe',
+padding: 5,
+openEffect: 'elastic',
+preload: true,
+ helpers : {
+        overlay : {
+            css : {
+                'background' : 'rgba(58, 42, 45, 0.65)'
+            }
+        }
+    }
+});
+};
+		</script>
+<body style="background-color:black;">
+    <div id="opening">
+	   <div>Welcome  Shoes special
+	   <img src="images/ball.png" class="fa fa-spinner w3-spin">
+	   </div>
+	</div>
+    <div id="topclass">
+			<ul id="sdt_menu" class="sdt_menu">
+				<li>
+					<a href="#">
+						<img src="images/NIKE.jpg"/>
+						<span class="sdt_active"></span>
+						<span class="sdt_wrap">
+						<span class="sdt_link">NIKE</span>
+						</span>
+					</a>
+					<div class="sdt_box">
+							<a href="Nike_ballstar.html">球星</a>
+							<a href="shoesNIKE.html">球鞋</a>
+							<a href="surronded_things_Nike.html">其他</a>
+					</div>
+				</li>
+				<li>
+					<a href="#">
+						<img src="images/adidas1.jpg" alt=""/>
+						<span class="sdt_active"></span>
+						<span class="sdt_wrap">
+						<span class="sdt_link">ADIDAS</span>
+						</span>
+					</a>
+					<div class="sdt_box">
+							<a href="Adidas_ballstar.html">球星</a>
+							<a href="shoesADIDAS.html">球鞋</a>
+							<a href="surronded_things_Adidas.html">其他</a>
+					</div>
+				</li>
+				<li>
+					<a href="#">
+						<img src="images/UA.jpg" alt=""/>
+						<span class="sdt_active"></span>
+						<span class="sdt_wrap">
+						<span class="sdt_link">UNDER ARMOUR</span>
+						</span>
+					</a>
+					<div class="sdt_box">
+							<a href="UA_ballstar.html">球星</a>
+							<a href="shoesUA.html">球鞋</a>
+							<a href="surronded_things_UA.html">其他</a>
+					</div>
+				</li>
+				<li>
+					<a href="#">
+						<img src="images/AJ.jpg" alt=""/>
+						<span class="sdt_active"></span>
+						<span class="sdt_wrap">
+						<span class="sdt_link">Air Jordan</span>
+						</span>
+					</a>
+					<div class="sdt_box">
+							<a href="AirJordan_ballstar.html">球星</a>
+							<a href="shoesAJ.html">球鞋</a>
+							<a href="surronded_things_AJ.html">其他</a>
+					</div>
+				</li>
+				<li>
+					<a href="#">
+						<img src="images/other.jpg" alt=""/>
+						<span class="sdt_active"></span>
+						<span class="sdt_wrap">
+							<span class="sdt_link">ALL</span>
+						</span>
+					</a>
+					<div class="sdt_box">
+							<a href="bootstrap.html">All Star</a>
+							<a href="shoesTotal.html">All Shoes</a>
+							<a href="surronded_things.html">All surronded</a>
+					</div>
+				</li>
+			</ul>
+	</div>
+	<div id="abgneBlock">
+		<ul class="list">
+			<li><a href="#"><img src="images/BG.png"></a></li>
+			<li><img src="images/addidas.jpg"onclick="fancyboxvideo(900,500, 'https://www.youtube.com/embed/sLmpxY_XRMU');"></li>
+			<li><img src="images/NIKE1.jpg" onclick="fancyboxvideo(900,500, 'https://www.youtube.com/embed/s-ua5tDFaJM');"></li>
+			<li><img src="images/UA.jpg" onclick="fancyboxvideo(900,500, 'https://www.youtube.com/embed/ikmd-vtRCqo');"></li>
+			<li><img src="images/jordan.jpg" onclick="fancyboxvideo(900,500, ' https://www.youtube.com/embed/FrVZS6L1VVE');"></li>
+		</ul>
+	</div>
+	<br>
+	<div class="frame"><iframe src="https://tw.global.nba.com/schedule/#!/7" width="942px" height="500px"></iframe></div>
+	<div class="w3-container w3-white" style="text-align:left;text-align:center;">
+	<ul>
+	  <li><h5 style="font-weight:bold;">NIKE相關連結</h5></li>
+	  <li><a href="https://www.facebook.com/NikeTaiwan/"><img src="images/fb_logo.png" alt="fb" class="ffootericon"></a>
+	      <a href="https://twitter.com/nike"><img src="images/twitter_logo.png" alt="twitter" class="footericon"></a><a href="https://www.youtube.com/user/nike"><img src="images/youtube_logo.png" alt="youtube" class="footericon"></a></li>
+	</ul>
+	<ul>
+	  <li><h5 style="font-weight:bold;">addidas相關連結</h5></li>
+	  <li><a href="https://www.facebook.com/AdidasOriginalsTaipei/"><img src="images/fb_logo.png" alt="fb" class="ffootericon"></a>
+	      <a href="https://twitter.com/adidas"><img src="images/twitter_logo.png" alt="twitter" class="footericon"></a><a href="https://www.youtube.com/user/adidas"><img src="images/youtube_logo.png" alt="youtube" class="footericon"></a></li>
+	</ul>
+	<ul>
+	  <li><h5 style="font-weight:bold;">UA相關連結</h5></li>
+	  <li><a href="https://www.facebook.com/uabasketball/"><img src="images/fb_logo.png" alt="fb" class="ffootericon"></a>
+	      <a href="https://twitter.com/underarmour"><img src="images/twitter_logo.png" alt="twitter" class="footericon"></a><a href="https://www.youtube.com/user/underarmour"><img src="images/youtube_logo.png" alt="youtube" class="footericon"></a></li>
+	</ul>
+	<ul>
+	  <li><h5 style="font-weight:bold;">Air Jordan相關連結</h5></li>
+	  <li><a href="https://www.facebook.com/jumpman23/"><img src="images/fb_logo.png" alt="fb" class="ffootericon"></a><a href="https://twitter.com/jumpman23"><img src="images/twitter_logo.png" alt="twitter" class="footericon"></a><a href="https://www.youtube.com/user/jumpman23"><img src="images/youtube_logo.png" alt="youtube" class="footericon"></a></li>
+	</ul>
+
+	<!-- import fancybox js  <p style="">圖片以及影片皆擷取自網路</p>-->
+
+	
+	</div>
+</body>
+</html>
